@@ -1,0 +1,9 @@
+admin - [gyanjyoti, gyandeep]
+teacher -  [manish12]
+superadmin - [manish12, ...]
+
+/api
+/auth
+/admins
+/superadmins
+/teachers

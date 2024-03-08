@@ -1,0 +1,121 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Admin {
+  id            Int       @id @default(autoincrement())
+  school_name   String
+  email         String?
+  phone         String
+  schoolAddress String
+  username      String    @unique
+  password      String
+  created_at    DateTime  @default(now())
+  token         String?
+  attendence Attendance[]
+  class Classes[]
+  course Course[]
+  student Student[]
+  subject Subject[]
+  teacher Teacher[]
+  section Section[]
+
+
+}
+
+model Attendance {
+  id         Int       @id @default(autoincrement())
+  admin      Admin     @relation(fields: [school_id], references: [id])
+  school_id  Int
+  class Classes @relation(fields: [class_id],references: [class_id])
+  class_id Int
+  subject    String
+  teacher Teacher @relation(fields: [teacher_id],references: [teacher_id])
+  teacher_id Int
+  date       String
+  day        String
+  date_time  DateTime  @default(now())
+  student Student @relation(fields: [student_id],references: [student_id])
+  student_id Int
+  is_present String
+}
+model Classes {
+  class_id Int @id @default(autoincrement())
+  admin Admin     @relation(fields: [school_id], references: [id])
+  school_id  Int
+  class_name String
+  attendence Attendance[]
+  student Student[]
+  section Section[]
+
+}
+
+
+model Course{
+  course_id Int @id @default(autoincrement())
+  admin Admin @relation(fields: [school_id], references: [id])
+  school_id  Int
+  course_name String @unique
+}
+model Student{
+  student_id Int @id @default(autoincrement())
+  admin Admin @relation(fields: [school_id], references: [id])
+  school_id  Int
+  name String
+  class Classes @relation(fields: [class_id],references: [class_id])
+  class_id Int
+  address String
+  section Int?
+  phone String?
+  father_name String
+  father_phone String
+  attendence Attendance[]
+}
+model Subject{
+  subject_id Int @id @default(autoincrement())
+  admin Admin @relation(fields: [school_id], references: [id])
+  school_id  Int
+  subject_name String
+  class_name String
+  level String
+}
+model superAdmin{
+  id Int @id @default(autoincrement())
+  name String
+  email String
+  phone String
+  username String @unique
+  password String
+  token String?
+}
+model Teacher{
+  teacher_id Int @id @default(autoincrement())
+  admin Admin @relation(fields: [school_id], references: [id])
+  school_id  Int
+  name String
+  address String
+  phone String
+  email String
+  course String
+  username String @unique
+  password String
+  token String?
+  attendence Attendance[]
+}
+model Section{
+  section_id Int @id @default(autoincrement())
+  admin Admin @relation(fields: [school_id],references: [id])
+  school_id Int
+  class Classes @relation(fields: [class_id],references: [class_id])
+  class_id Int
+  name String
+}

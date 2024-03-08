@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `student` MODIFY `student_id` INTEGER NOT NULL AUTO_INCREMENT;

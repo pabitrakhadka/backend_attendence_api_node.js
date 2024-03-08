@@ -1,0 +1,30 @@
+{
+  "name": "attendance_api",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.9.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "date": "^2.0.4",
+    "date-and-time": "^3.1.1",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.5",
+    "nodemon": "^3.0.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.9.1"
+  }
+}
